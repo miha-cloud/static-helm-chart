@@ -1,0 +1,21 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: {{ include "helm-chart.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  hosts:
+    {{- range .Values.ingress.hosts }}
+    - {{ .host | quote }}
+    {{- end }}
+  scaleTargetRef:
+      deployment: {{ .Values.name }}
+      service: {{ .Values.name }}
+      port: {{ .Values.service.port }}
+  replicas:
+      min: {{ .Values.autoscaling.min }}    
+      max: {{ .Values.autoscaling.max }}
+{{- end }}

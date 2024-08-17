@@ -1,0 +1,64 @@
+
+replicaCount: 1
+namespace: ef855cef-1a01-4c30-9ba5-2ddef0b1e17b
+service: s-ef855cef-1a01-4c30-9ba5-2ddef0b1e17b
+name: miha-1722261721
+host: 1722261721.miha-clound.com
+image:
+    repository: mihacloud/1722261721
+    tag: latest
+
+keda:
+    namespace: keda
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+    create: true
+    automount: true
+    annotations: {}
+    name: ""
+
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+
+service:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3000
+    annotations: {}
+
+ingress:
+    enabled: true
+    className: "nginx"
+    annotations: 
+        kubernetes.io/ingress.class: "nginx"
+    hosts:
+        - host: 1722261721.miha-clound.com
+          paths: 
+            - path: /
+              pathType: ImplementationSpecific
+    tls: []
+
+resources: 
+    limits:
+        cpu: 0.5
+        memory: 512Mi
+    
+
+autoscaling:
+    enabled: true
+    min: 0
+    max: 1
+    targetCPUUtilizationPercentage: 80
+
+volumes: []
+volumeMounts: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
+                        
