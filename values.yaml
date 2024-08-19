@@ -1,11 +1,11 @@
 
 replicaCount: 1
-namespace: ef855cef-1a01-4c30-9ba5-2ddef0b1e17b
-service: s-ef855cef-1a01-4c30-9ba5-2ddef0b1e17b
-name: miha-1722261721
-host: 1722261721.miha-clound.com
+namespace: 6bd63eb7-ef40-432f-992a-5eedc8670a0a
+service: s-6bd63eb7-ef40-432f-992a-5eedc8670a0a
+name: miha-e2dc3fd17429
+host: e2dc3fd17429.miha-clound.com
 image:
-    repository: mihacloud/1722261721
+    repository: mihacloud/e2dc3fd17429
     tag: latest
 
 keda:
@@ -28,8 +28,8 @@ securityContext: {}
 
 service:
     type: ClusterIP
-    port: 3000
-    targetPort: 3000
+    port: 80
+    targetPort: 80
     annotations: {}
 
 ingress:
@@ -38,7 +38,7 @@ ingress:
     annotations: 
         kubernetes.io/ingress.class: "nginx"
     hosts:
-        - host: 1722261721.miha-clound.com
+        - host: e2dc3fd17429.miha-clound.com
           paths: 
             - path: /
               pathType: ImplementationSpecific
@@ -49,6 +49,9 @@ resources:
         cpu: 0.5
         memory: 512Mi
     
+    requests:
+        cpu: 0.1
+        memory: 128Mi
 
 autoscaling:
     enabled: true
